@@ -40,3 +40,22 @@ exports.updateTask = async (req, res) => {
         res.status(500).json({ error: "Failed to update task" });
     }
 };
+
+//###############################################
+exports.deleteTask = async (req, res) => {
+    try {
+        const { id, title, description, status } = req.body;
+        const taskId = id;
+        const deletedTask = await Task.findOneAndDelete(
+            { _id: taskId, userId: req.user.id },
+            { title, description, status },
+            { new: true }
+        );
+        if (!deletedTask) {
+            return res.status(404).json({ error: "Task not found or unauthorized" });
+        }
+        res.status(200).json(deletedTask);
+    } catch (err) {
+        res.status(500).json({ error: "Failed to delete task" });
+    }
+}

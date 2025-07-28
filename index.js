@@ -62,7 +62,7 @@ connectDB()                                   // Call the function to connect to
     .then(() => {                             // If connection is successful...
         app.listen(PORT, () => {              // Start the Express server on the specified port
             console.log(`Server is running on port ${PORT}`);   // Log a success message to console
-            console.log(`http://localhost:${PORT}`);            // Log the local URL to access the server
+            console.log(`https://donezo-api.onrender.com`);            // Log the local URL to access the server
         });
     })
     .catch((error) => {                       // If connection fails...
